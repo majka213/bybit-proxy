@@ -11,21 +11,24 @@ BYBIT_URL = "https://api.bybit.com/v2/public/funding/prev-funding-rate?symbol=BT
 def funding():
     print("FUNKCJA /funding ZOSTAŁA URUCHOMIONA")
     try:
-        headers = {"User-Agent": "Mozilla/5.0"}
+        headers = {
+            "User-Agent": "Mozilla/5.0"
+        }
         response = requests.get(BYBIT_URL, headers=headers)
 
         print("=== RESPONSE STATUS CODE ===")
         print(response.status_code)
-        print("=== RESPONSE TEXT ===")
+        print("=== RAW RESPONSE TEXT ===")
         print(response.text)
-        print("=====================")
+        print("============================")
 
-        return jsonify(response.json())
+        # Zwróć surowy tekst odpowiedzi jako plain/text
+        return response.text, response.status_code
     except Exception as e:
         print("=== ERROR WYWALONY ===")
         import traceback
         traceback.print_exc()
-        print("=====================")
+        print("======================")
         return jsonify({"error": str(e)}), 500
 
 app.run(host="0.0.0.0", port=10000)
