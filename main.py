@@ -22,9 +22,10 @@ def funding():
 
         return jsonify(response.json())
     except Exception as e:
-        print("=== ERROR ===")
-        print(str(e))
-        print("=============")
+        print("=== ERROR WYWALONY ===")
+        import traceback
+        traceback.print_exc()
+        print("=====================")
         return jsonify({"error": str(e)}), 500
 
 app.run(host="0.0.0.0", port=10000)
